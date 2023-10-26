@@ -25,14 +25,26 @@ namespace Day02WPFHelloWorld
             InitializeComponent();
         }
 
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void BtnHelloLabel_Click(object sender, RoutedEventArgs e)
         {
-
+            string name = TbxName.Text;
+            if (name == "")
+            {
+                MessageBox.Show("Name must not be empty", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            LblGreeting.Content = $"Hello {name}, nice to meet you!";
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void BtnHelloMessageBox_Click(object sender, RoutedEventArgs e)
         {
-
+            string name = TbxName.Text;
+            if (name == "")
+            {
+                MessageBox.Show("Name must not be empty", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            MessageBox.Show($"Hello {name}, nice to meet you!", "Greeting", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
 }

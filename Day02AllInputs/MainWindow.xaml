@@ -5,8 +5,42 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Day02AllInputs"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="349" Width="455">
     <Grid>
-        
+        <Label Content="Name: " HorizontalAlignment="Left" Margin="27,24,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="TbxName" HorizontalAlignment="Left" Height="26" Margin="88,24,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="148"/>
+
+        <Label Content="Age: " HorizontalAlignment="Left" Margin="27,55,0,0" VerticalAlignment="Top"/>
+        <RadioButton Click="RadioButton_Checked" x:Name="radioBelow18" GroupName="ageGroup" Content="below 18" HorizontalAlignment="Left" Margin="88,61,0,0" VerticalAlignment="Top"/>
+        <RadioButton Click="RadioButton_Checked" x:Name="radio18To35" GroupName="ageGroup" Content="18-35" HorizontalAlignment="Left" Margin="220,61,0,0" VerticalAlignment="Top"/>
+        <RadioButton Click="RadioButton_Checked" x:Name="radio36AndUp" GroupName="ageGroup" Content="36 and up" HorizontalAlignment="Left" Margin="350,61,0,0" VerticalAlignment="Top"/>
+
+        <Label Content="Pets: " HorizontalAlignment="Left" Margin="27,86,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="chkDog" Click="CheckBox_Click"  HorizontalAlignment="Left" Height="18" Margin="88,92,0,0" VerticalAlignment="Top" Width="95" RenderTransformOrigin="0.501,-0.037">
+            <WrapPanel Orientation="Horizontal">
+                <Image Source="https://img.freepik.com/premium-vector/cute-pug-dog-logo-cartoon-vector-icon-illustration-animal-nature-icon-concept-isolated-premium-flat_138676-6623.jpg" Width="15" Height="15"/>
+                <TextBlock Text="Dog" VerticalAlignment="Center"/>
+            </WrapPanel>
+        </CheckBox>
+
+        <CheckBox x:Name="chkCat" Click="CheckBox_Click" Content="Cat" HorizontalAlignment="Left" Height="18" Margin="220,92,0,0" VerticalAlignment="Top" Width="95" RenderTransformOrigin="0.501,-0.037"/>
+        <CheckBox x:Name="chkOther" Click="CheckBox_Click" Content="Other" HorizontalAlignment="Left" Height="18" Margin="350,92,0,0" VerticalAlignment="Top" Width="95" RenderTransformOrigin="0.501,-0.037"/>
+
+        <Label Content="Continent of  Residence: " HorizontalAlignment="Left" Margin="27,117,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="CmbContinent" Margin="185,121,150,0" VerticalAlignment="Top" SelectionChanged="ComboBox_SelectionChanged" IsEditable="False">
+            <ComboBoxItem Content="Asia"/>
+            <ComboBoxItem Content="Africa"/>
+            <ComboBoxItem Content="Europe"/>
+            <ComboBoxItem Content="North America"/>
+            <ComboBoxItem Content="South America"/>
+            <ComboBoxItem Content="Australia"/>
+        </ComboBox>
+
+        <Label Content="Preferred Temp: " HorizontalAlignment="Left" Margin="27,148,0,0" VerticalAlignment="Top"/>
+        <Slider ValueChanged="tempSlider_ValueChanged" x:Name="tempSlider" Minimum="18" Maximum="25" Value="20" TickFrequency="1" IsSnapToTickEnabled="True" Width="200" Margin="151,155,104,155"/>
+        <TextBlock x:Name="selectedTemp18" Text="18°C" VerticalAlignment="Top" Margin="154,173,271,0"/>
+        <TextBlock x:Name="selectedTemp25" Text="25°C" VerticalAlignment="Top" Margin="321,173,107,0"/>
+
+        <Button Click="Button_Click" Content="Register Me" HorizontalAlignment="Center" Margin="0,285,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>

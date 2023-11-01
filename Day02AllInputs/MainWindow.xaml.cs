@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -26,7 +27,7 @@ namespace Day02AllInputs
             InitializeComponent();  
         }
 
-        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void BtnRegister_Click(object sender, RoutedEventArgs e)
         {
             string name = TbxName.Text;
             if (name == "")
@@ -34,62 +35,79 @@ namespace Day02AllInputs
                 MessageBox.Show("Name must not be empty", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-        }
 
-        private void RadioButton_Checked(object sender, RoutedEventArgs e)
-        {
-            RadioButton radioButton = (RadioButton)sender;
-            string age = radioButton.Content.ToString();
-            if(age == "")
-            {
-                MessageBox.Show("Age must not be empty", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-        }
+            var checkedButton = GridMain.Children.OfType<RadioButton>().FirstOrDefault(r => r.IsChecked == true && r.GroupName == "RbnAge");           
+            string age = checkedButton.Content.ToString();
 
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ComboBox comboBox = (ComboBox)sender;
-            string continent = ((ComboBoxItem)comboBox.SelectedItem).Content.ToString();
-            if (continent == "")
-            {
-                MessageBox.Show("Age must not be empty", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-        }
-
-        private void CheckBox_Click(object sender, RoutedEventArgs e)
-        {
-            CheckBox checkBox = (CheckBox)sender;
-            string pet = checkBox.Content.ToString();
-            if (pet == "")
-            {
-                MessageBox.Show("Pet must not be empty", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-
-            //if (checkBox == chkCat || checkBox == chkDog)
+            //string age = "";
+            //if (RbnAgeBelow18.IsChecked == true)
             //{
-            //    // If "Cat" or "Dog" is clicked, uncheck "Other."
-            //    chkOther.IsChecked = false;
+            //    age = "Below 18";
             //}
-            //else if (checkBox == chkOther)
+            //else if (RbnAge18To35.IsChecked == true)
             //{
-            //    // If "Other" is clicked, uncheck "Cat" and "Dog."
-            //    chkCat.IsChecked = false;
-            //    chkDog.IsChecked = false;
+            //    age = "18 to 35";
             //}
-        }
+            //else if (RbnAge36Plus.IsChecked == true)
+            //{
+            //    age = "36 or above";
+            //}
+            //else
+            //{ // internal error
+            //    MessageBox.Show(this, "Error reading radio buttons state", "Internal error", MessageBoxButton.OK, MessageBoxImage.Error);
+            //    return;
+            //}
 
-        private void tempSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            int selectedAge = (int)e.NewValue;
-            string temp = selectedAge.ToString();
-        }
+            List<CheckBox> CheckBoxes = new List<CheckBox> { CbxPetsCats, CbxPetsDogs, CbxPetsOther };
+            string pets = string.Join(",", CheckBoxes.Where(Ckb => Ckb.IsChecked == true).Select(cb => (cb.Content as WrapPanel)?.Children.OfType<TextBlock>().FirstOrDefault()?.Text));
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
+            //string pets = string.Join(",", CheckBoxes.Where(Ckb => Ckb.IsChecked == true).Select(cb => cb.Content));
 
+            //List<string> petsList = new List<string>();
+            //if (CbxPetsCats.IsChecked == true)
+            //{
+            //    petsList.Add("Cats");
+            //}
+            //if (CbxPetsDogs.IsChecked == true)
+            //{
+            //    petsList.Add("Dogs");
+            //}
+            //if (CbxPetsOther.IsChecked == true)
+            //{
+            //    petsList.Add("Other");
+            //}
+            //string pets = string.Join<string>(",", petsList);
+
+            /* string continent = ComboContinent.Text;
+            Console.WriteLine("Continent: " + continent);
+            if (ComboContinent.SelectedIndex == 0)
+            {
+                MessageBox.Show(this, "You must select a continent", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            } */
+
+            string continent = ComboContinent.SelectedValue?.ToString(); // conditional call
+            if (continent == null)
+            {
+                MessageBox.Show(this, "Please select a continent", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            
+            double tempC = SliderTempC.Value;
+            
+            string line = $"{name};{age};{pets};{continent};{tempC}";
+            File.AppendAllText(@"..\..\output.txt", line + "\n");
+            MessageBox.Show(this, "Data appended to file", "Confirmation", MessageBoxButton.OK, MessageBoxImage.Information);
+
+            // reset all inputs after successfully writing data to file
+            TbxName.Text = "";
+            RbnAgeBelow18.IsChecked = true;
+            foreach (var checkBox in CheckBoxes)
+            {
+                checkBox.IsChecked = false;
+            }
+            ComboContinent.SelectedIndex = 0;
+            SliderTempC.Value = 22;
         }
     }
 }

@@ -1,0 +1,64 @@
+﻿<Window x:Class="Day04TodosCRUD.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Day04TodosCRUD"
+        mc:Ignorable="d"
+       Title="ToDo App" Height="361" Width="674"
+        >
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_File">
+                <MenuItem Header="_Export..." Click="MenuItemExport_Click"/>
+                <Separator />
+                <MenuItem Header="_Exit" Click="MenuItem_FileExitClick"/>
+            </MenuItem>
+            <MenuItem Header="_Sort">
+                <MenuItem Header="By _difficulty" />
+                <MenuItem Header="By _dueDate" />
+                <MenuItem Header="By _status" />
+            </MenuItem>
+            <MenuItem Header="_Add todo" Click="MenuItem_AddTodoClick"></MenuItem>
+        </Menu>
+        <StatusBar DockPanel.Dock="Bottom">
+            <StatusBarItem>
+                <TextBlock Name="LblStatus" />
+            </StatusBarItem>
+        </StatusBar>
+        <Grid Height="306" Margin="0,10,0,0">
+            <ListView Name="LvToDos"  Margin="20,29,20,50" SelectionChanged="LvTodos_OnSelectionChanged" SelectionMode="Single" BorderBrush="#FF8994A7" MouseDoubleClick="lvTodos_MouseDoubleClick">
+                <ListView.Resources>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="TextWrapping" Value="Wrap"/>
+                    </Style>
+                </ListView.Resources>
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Task" Width="350"  DisplayMemberBinding="{Binding Task}" />
+                        <GridViewColumn Header="Difficulty" Width="60" DisplayMemberBinding="{Binding Difficulty}" />
+                        <GridViewColumn Header="Due Date" Width="150" DisplayMemberBinding="{Binding DueDate, StringFormat='\d'}" />
+                        <GridViewColumn Header="Status" Width="70" DisplayMemberBinding="{Binding Status}" />
+                    </GridView>
+                </ListView.View>
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ListViewItem">
+                                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="True">
+                                        <StackPanel Orientation="Vertical">
+                                            <ContentPresenter />
+                                            <Button Content="Edit" Click="BtnEdit_Click" Visibility="{Binding IsSelected}" />
+                                            <Button Content="Delete" Click="BtnDelete_Click" Visibility="{Binding IsSelected}" />
+                                        </StackPanel>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListView.ItemContainerStyle>
+            </ListView>
+        </Grid>
+    </DockPanel>
+</Window>

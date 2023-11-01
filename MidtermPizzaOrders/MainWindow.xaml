@@ -11,7 +11,7 @@
             <MenuItem Header="_File">
                 <MenuItem Header="E_xport all to CSV..." />
                 <Separator />
-                <MenuItem Header="_Exit" />
+                <MenuItem Header="_Exit" Click="MenuItemeExit_Click"/>
             </MenuItem>
             <MenuItem Header="_Mark selected">
                 <MenuItem Header="_Placed" Click="MenuItemMarkSelectedPlaced_Click"/>

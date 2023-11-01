@@ -5,8 +5,53 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Day02TempConv"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="MainWindow" Height="300" Width="350" ResizeMode="NoResize" Loaded="Window_Loaded">
+    <Grid Name="GridMain">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="12*" />
+            <ColumnDefinition Width="14*" />
+            <ColumnDefinition Width="12*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="3*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal">
+            <Label Content="Input" HorizontalAlignment="Center" Width="40" VerticalAlignment="Center"/>
+            <TextBox x:Name="TbxInput" HorizontalAlignment="Center" Height="23" Margin="5,4,0,0" TextWrapping="Wrap" Text="10" VerticalAlignment="Center" Width="60" TextChanged="TbxInput_TextChanged" PreviewTextInput="TbxInput_PreviewTextInput"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="0" Grid.Row="1" Margin="8,8,0,0">
+            <StackPanel.Resources>
+                <Style TargetType="{x:Type RadioButton}">
+                    <Setter Property="Margin" Value="0,8,0,0"/>
+                    <EventSetter Event="Click" Handler="AnyRadioButton_Click"/>
+                </Style>
+            </StackPanel.Resources>
+            <Label Content="Input Scale"/>
+            <RadioButton Name="RbnInCel" Content="Celsius" IsChecked="True"/>
+            <RadioButton Name="RbnInFah" Content="Fahrenheit"/>
+            <RadioButton Name="RbnInKel" Content="Kelvin"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="2" Grid.Row="1" Margin="8,8,0,0">
+            <StackPanel.Resources>
+                <Style TargetType="{x:Type RadioButton}">
+                    <Setter Property="Margin" Value="0,8,0,0"/>
+                    <EventSetter Event="Click" Handler="AnyRadioButton_Click"/>
+                </Style>
+            </StackPanel.Resources>
+            <Label Content="Output Scale"/>
+            <RadioButton Name="RbnOutCel" Content="Celsius" IsChecked="True"/>
+            <RadioButton Name="RbnOutFah" Content="Fahrenheit"/>
+            <RadioButton Name="RbnOutKel" Content="Kelvin"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal">
+            <Label Content="Output" Grid.Column="1" HorizontalAlignment="Left" Width="50" VerticalAlignment="Top"/>
+            <TextBox Name="TbxOutput" HorizontalAlignment="Left" Height="23" Margin="5,4,0,0" TextWrapping="Wrap" Text="-" VerticalAlignment="Top" Width="60"/>
+        </StackPanel>
     </Grid>
 </Window>

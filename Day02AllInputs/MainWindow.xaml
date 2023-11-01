@@ -5,42 +5,45 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Day02AllInputs"
         mc:Ignorable="d"
-        Title="MainWindow" Height="349" Width="455">
-    <Grid>
-        <Label Content="Name: " HorizontalAlignment="Left" Margin="27,24,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="TbxName" HorizontalAlignment="Left" Height="26" Margin="88,24,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="148"/>
+        Title="MainWindow" Height="400" Width="500" ResizeMode="NoResize">
+    <Grid Name="GridMain">
+        <Label Content="Name: " HorizontalAlignment="Left" Margin="27,24,0,0" VerticalAlignment="Top"  Width="75"/>
+        <TextBox x:Name="TbxName" HorizontalAlignment="Left" Margin="88,28,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150"/>
 
-        <Label Content="Age: " HorizontalAlignment="Left" Margin="27,55,0,0" VerticalAlignment="Top"/>
-        <RadioButton Click="RadioButton_Checked" x:Name="radioBelow18" GroupName="ageGroup" Content="below 18" HorizontalAlignment="Left" Margin="88,61,0,0" VerticalAlignment="Top"/>
-        <RadioButton Click="RadioButton_Checked" x:Name="radio18To35" GroupName="ageGroup" Content="18-35" HorizontalAlignment="Left" Margin="220,61,0,0" VerticalAlignment="Top"/>
-        <RadioButton Click="RadioButton_Checked" x:Name="radio36AndUp" GroupName="ageGroup" Content="36 and up" HorizontalAlignment="Left" Margin="350,61,0,0" VerticalAlignment="Top"/>
+        <Label Content="Age: " HorizontalAlignment="Left" Margin="27,55,0,0" VerticalAlignment="Top"  Width="75"/>
+        <RadioButton x:Name="RbnAgeBelow18" GroupName="RbnAge" Content="below 18" HorizontalAlignment="Left" Margin="88,61,0,0" VerticalAlignment="Top"  IsChecked="True"/>
+        <!--should make one checked-->
+        <RadioButton x:Name="RbnAge18To35" GroupName="RbnAge" Content="18-35" HorizontalAlignment="Left" Margin="220,61,0,0" VerticalAlignment="Top"/>
+        <RadioButton x:Name="RbnAge36Plus" GroupName="RbnAge" Content="36 and above" HorizontalAlignment="Left" Margin="350,61,0,0" VerticalAlignment="Top"/>
 
-        <Label Content="Pets: " HorizontalAlignment="Left" Margin="27,86,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="chkDog" Click="CheckBox_Click"  HorizontalAlignment="Left" Height="18" Margin="88,92,0,0" VerticalAlignment="Top" Width="95" RenderTransformOrigin="0.501,-0.037">
+        <Label Content="Pets: " HorizontalAlignment="Left" Margin="27,86,0,0" VerticalAlignment="Top" Width="75"/>
+        <CheckBox x:Name="CbxPetsDogs" HorizontalAlignment="Left" Margin="88,92,0,0" VerticalAlignment="Top" Width="95" RenderTransformOrigin="0.501,-0.037">
             <WrapPanel Orientation="Horizontal">
                 <Image Source="https://img.freepik.com/premium-vector/cute-pug-dog-logo-cartoon-vector-icon-illustration-animal-nature-icon-concept-isolated-premium-flat_138676-6623.jpg" Width="15" Height="15"/>
-                <TextBlock Text="Dog" VerticalAlignment="Center"/>
+                <TextBlock Text="Dogs" VerticalAlignment="Center"/>
             </WrapPanel>
         </CheckBox>
+        <CheckBox x:Name="CbxPetsCats" Content="Cats" HorizontalAlignment="Left" Margin="220,92,0,0" VerticalAlignment="Top" Width="95" RenderTransformOrigin="0.501,-0.037"/>
+        <CheckBox x:Name="CbxPetsOther" Content="Other" HorizontalAlignment="Left"  Margin="350,92,0,0" VerticalAlignment="Top" Width="95" RenderTransformOrigin="0.501,-0.037"/>
 
-        <CheckBox x:Name="chkCat" Click="CheckBox_Click" Content="Cat" HorizontalAlignment="Left" Height="18" Margin="220,92,0,0" VerticalAlignment="Top" Width="95" RenderTransformOrigin="0.501,-0.037"/>
-        <CheckBox x:Name="chkOther" Click="CheckBox_Click" Content="Other" HorizontalAlignment="Left" Height="18" Margin="350,92,0,0" VerticalAlignment="Top" Width="95" RenderTransformOrigin="0.501,-0.037"/>
-
-        <Label Content="Continent of  Residence: " HorizontalAlignment="Left" Margin="27,117,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="CmbContinent" Margin="185,121,150,0" VerticalAlignment="Top" SelectionChanged="ComboBox_SelectionChanged" IsEditable="False">
+        <Label Content="Continent of  Residence: " HorizontalAlignment="Left" Margin="27,117,0,0" VerticalAlignment="Top" Width="150"/>
+        <ComboBox x:Name="ComboContinent" Margin="177,120,78,0" VerticalAlignment="Top" SelectedValuePath="Content" IsEditable="False" Width="200">
+            <ComboBoxItem IsSelected="True" >== Please select me ==</ComboBoxItem>
             <ComboBoxItem Content="Asia"/>
             <ComboBoxItem Content="Africa"/>
             <ComboBoxItem Content="Europe"/>
-            <ComboBoxItem Content="North America"/>
-            <ComboBoxItem Content="South America"/>
+            <ComboBoxItem Content="America"/>
+            <ComboBoxItem Content="Antarctica"/>
             <ComboBoxItem Content="Australia"/>
         </ComboBox>
 
-        <Label Content="Preferred Temp: " HorizontalAlignment="Left" Margin="27,148,0,0" VerticalAlignment="Top"/>
-        <Slider ValueChanged="tempSlider_ValueChanged" x:Name="tempSlider" Minimum="18" Maximum="25" Value="20" TickFrequency="1" IsSnapToTickEnabled="True" Width="200" Margin="151,155,104,155"/>
-        <TextBlock x:Name="selectedTemp18" Text="18°C" VerticalAlignment="Top" Margin="154,173,271,0"/>
-        <TextBlock x:Name="selectedTemp25" Text="25°C" VerticalAlignment="Top" Margin="321,173,107,0"/>
+        <Label Content="Pref. temp (C):" HorizontalAlignment="Left" Margin="27,148,0,0" VerticalAlignment="Top" Width="90"/>
+        <Slider x:Name="SliderTempC" IsSnapToTickEnabled="True" TickPlacement="BottomRight" TickFrequency="0.5" Minimum="15" Maximum="35" Value="22" HorizontalAlignment="Left" Margin="142,155,0,0" VerticalAlignment="Top" Width="220"/>
+        <Label x:Name="LblTempC" ContentStringFormat="{}{0:0.0}°C" Content="{Binding ElementName=SliderTempC, Path=Value, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="373,149,0,0" VerticalAlignment="Top" Width="45" RenderTransformOrigin="6.482,-1.321"/>
 
-        <Button Click="Button_Click" Content="Register Me" HorizontalAlignment="Center" Margin="0,285,0,0" VerticalAlignment="Top"/>
+        <TextBlock x:Name="selectedTemp18" Text="15°C" VerticalAlignment="Top" Margin="145,179,280,0"/>
+        <TextBlock x:Name="selectedTemp25" Text="35°C" VerticalAlignment="Top" Margin="332,179,96,0"/>
+
+        <Button x:Name="BtnRegister" Click="BtnRegister_Click" Content="Register Me (append to file Data.txt)" HorizontalAlignment="Center" Margin="0,238,0,0" VerticalAlignment="Top" Width="286"/>
     </Grid>
 </Window>

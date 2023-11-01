@@ -14,10 +14,10 @@
                 <MenuItem Header="_Exit" />
             </MenuItem>
             <MenuItem Header="_Mark selected">
-                <MenuItem Header="_Placed" />
-                <MenuItem Header="_Fulfilled" />
+                <MenuItem Header="_Placed" Click="MenuItemMarkSelectedPlaced_Click"/>
+                <MenuItem Header="_Fulfilled" Click="MenuItemMarkSelectedFulfilled_Click"/>
             </MenuItem>
-            <MenuItem Header="_New order"/> <!-- NewOrderDialog is shown when this is clicked -->
+            <MenuItem Header="_New order" Click="MenuItem_NewOrderClick"/> <!-- NewOrderDialog is shown when this is clicked -->
         </Menu>
         <StatusBar DockPanel.Dock="Bottom">
             <StatusBarItem>
@@ -28,13 +28,40 @@
         <ListView.View>
             <GridView>
                 <GridViewColumn Header="Id" Width="25" DisplayMemberBinding="{Binding Id}" />
-                <GridViewColumn Header="Client name" Width="150" DisplayMemberBinding="{Binding ClientName}" />
-                <GridViewColumn Header="Post code" Width="65" DisplayMemberBinding="{Binding ClientPostalCode}" />
-                <GridViewColumn Header="Deadline" Width="150" DisplayMemberBinding="{Binding DeliveryDeadline}" />
-                <!-- you must add all the remaining columns here -->
-            </GridView>
+                <GridViewColumn Header="Client name" Width="100" DisplayMemberBinding="{Binding ClientName}" />
+                <GridViewColumn Header="Post code" Width="150" DisplayMemberBinding="{Binding ClientPostalCode}" />
+                <GridViewColumn Header="Deadline" Width="130" DisplayMemberBinding="{Binding DeliveryDeadline}" />
+                <GridViewColumn Header="Size" Width="60" DisplayMemberBinding="{Binding Size}" />
+                <GridViewColumn Header="Baking Time" Width="80" DisplayMemberBinding="{Binding BakingTimeMinutes}" />
+                <GridViewColumn Header="Extras" Width="150" DisplayMemberBinding="{Binding Extras}" />
+                <GridViewColumn Header="Order Status" Width="90" DisplayMemberBinding="{Binding OrderStatus}" />
+                </GridView>
             <!-- you must add context menu to ListView/GridView that acts on currently selected items -->
         </ListView.View>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    <Setter Property="VerticalContentAlignment" Value="Stretch" />
+                    <Setter Property="Padding" Value="0" />
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="Gray" />
+                        </Trigger>
+                        <DataTrigger Binding="{Binding OrderStatus}" Value="Fulfilled">
+                            <Setter Property="Background" Value="White" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding OrderStatus}" Value="Placed">
+                            <Setter Property="Background" Value="Green" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Change Status to Placed" Click="ChangeStatusToPlaced_Click" />
+                    <MenuItem Header="Change Status to Fulfilled" Click="ChangeStatusToFulfilled_Click" />
+                </ContextMenu>
+            </ListView.ContextMenu>
         </ListView>
     </DockPanel>
 </Window>

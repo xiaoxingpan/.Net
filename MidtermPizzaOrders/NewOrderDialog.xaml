@@ -4,27 +4,40 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MidtermPizzaOrders"
-        mc:Ignorable="d"
+        mc:Ignorable="d" WindowStartupLocation="CenterOwner"
         Title="NewOrderDialog" Height="409" Width="627">
     <Grid>
-        <Label Content="Client name:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.629,-0.64" Width="155"/>
-        <Label Content="Client postal code:" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.629,-0.64" Width="155"/>
-        <Label Content="Delivery deadline:" HorizontalAlignment="Left" Margin="10,72,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.629,-0.64" Width="155"/>
-        <Label Content="Pizza size:" HorizontalAlignment="Left" Margin="10,122,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.629,-0.64" Width="155"/>
-        <Label Content="Baking time (minutes):" HorizontalAlignment="Left" Margin="10,165,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.629,-0.64" Width="129"/>
-        <Label Content="Extras / modifications:" HorizontalAlignment="Left" Margin="9,216,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.629,-0.64" Width="155"/>
-        <TextBox HorizontalAlignment="Left" Margin="189,18,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="299"/>
-        <TextBox HorizontalAlignment="Left" Margin="189,49,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="299"/>
-        <DatePicker HorizontalAlignment="Left" Margin="189,74,0,0" VerticalAlignment="Top" Width="141"/>
-        <Label Content="time hh:mm" HorizontalAlignment="Left" Margin="349,73,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Margin="428,77,0,0" TextWrapping="Wrap" Text="11:22" VerticalAlignment="Top" Width="60"/>
-        <ComboBox HorizontalAlignment="Left" Margin="189,132,0,0" VerticalAlignment="Top" Width="299"/>
-        <Label Content="15" Width="24"  HorizontalAlignment="Left" Margin="144,166,0,0" VerticalAlignment="Top"/>
-        <Slider HorizontalAlignment="Left" Margin="189,171,0,0" VerticalAlignment="Top" Width="299"/>
-        <CheckBox Content="Extra cheese" HorizontalAlignment="Left" Margin="188,221,0,0" VerticalAlignment="Top"/>
-        <CheckBox Content="Deep dish" HorizontalAlignment="Left" Margin="295,221,0,0" VerticalAlignment="Top"/>
-        <CheckBox Content="Whole wheat" HorizontalAlignment="Left" Margin="399,221,0,0" VerticalAlignment="Top"/>
-        <Button Content="Cancel" HorizontalAlignment="Left" Margin="189,260,0,0" VerticalAlignment="Top" Width="132"/>
-        <Button Content="Place order" HorizontalAlignment="Left" Margin="358,260,0,0" VerticalAlignment="Top" Width="130"/>
+        <Label Content="Client name:" HorizontalAlignment="Left" Margin="76,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.629,-0.64" Width="155"/>
+        <Label Content="Client postal code:" HorizontalAlignment="Left" Margin="76,64,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.629,-0.64" Width="155"/>
+        <Label Content="Delivery deadline:" HorizontalAlignment="Left" Margin="76,129,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.629,-0.64" Width="155"/>
+        <Label Content="Pizza size:" HorizontalAlignment="Left" Margin="76,179,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.629,-0.64" Width="155"/>
+        <Label Content="Baking time (minutes):" HorizontalAlignment="Left" Margin="76,223,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.629,-0.64" Width="129"/>
+        <Label Content="Extras / modifications:" HorizontalAlignment="Left" Margin="75,273,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.629,-0.64" Width="155"/>
+        <TextBox Name="TbxName" HorizontalAlignment="Left" Margin="255,14,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="299" LostFocus="TbxName_LostFocus"/>
+        <TextBox Name="TbxPostCode" HorizontalAlignment="Left" Margin="255,68,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="299" LostFocus="TbxPostCode_LostFocus"/>
+        <DatePicker Name="DlDate" HorizontalAlignment="Center" Margin="0,131,0,0" VerticalAlignment="Top" Width="141"/>
+        <Label Content="time hh:mm" HorizontalAlignment="Left" Margin="415,130,0,0" VerticalAlignment="Top"/>
+        <TextBox Name="DlTime" HorizontalAlignment="Left" Margin="494,134,0,0" TextWrapping="Wrap" Text="11:22" VerticalAlignment="Top" Width="60"/>
+        <ComboBox Name="ComboSize" HorizontalAlignment="Left" Margin="255,182,0,0" VerticalAlignment="Top" Width="299" IsEditable="False">
+            <ComboBoxItem IsSelected="True" >== Please select me ==</ComboBoxItem>
+            <ComboBoxItem Content="Small">
+                <ComboBoxItem.Tag>3</ComboBoxItem.Tag>
+            </ComboBoxItem>
+            <ComboBoxItem Content="Medium">
+                <ComboBoxItem.Tag>7</ComboBoxItem.Tag>
+            </ComboBoxItem>
+            <ComboBoxItem Content="Large">
+                <ComboBoxItem.Tag>12</ComboBoxItem.Tag>
+            </ComboBoxItem>
+        </ComboBox>
+        <Label Content="{Binding ElementName=BakingTimeSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" Width="40"  HorizontalAlignment="Left" Margin="210,224,0,0" VerticalAlignment="Top"/>
+        <Slider Name="BakingTimeSlider" HorizontalAlignment="Left" Margin="255,221,0,0" VerticalAlignment="Top" Width="299" IsSelectionRangeEnabled="True" IsSnapToTickEnabled="True" TickPlacement="TopLeft" TickFrequency="1" Minimum="12" Maximum="18" SelectionStart="12" SelectionEnd="18" ValueChanged="BakingTimeSlider_ValueChanged" Value="15"/>
+        <CheckBox Name="CbxExtraCheese" Content="Extra cheese" HorizontalAlignment="Left" Margin="254,278,0,0" VerticalAlignment="Top"/>
+        <CheckBox Name="CbxDeepDish" Content="Deep dish" HorizontalAlignment="Left" Margin="361,278,0,0" VerticalAlignment="Top"/>
+        <CheckBox Name="CbxWholeWheat" Content="Whole wheat" HorizontalAlignment="Left" Margin="465,278,0,0" VerticalAlignment="Top"/>
+        <Button IsCancel="True" Content="Cancel" HorizontalAlignment="Left" Margin="166,338,0,0" VerticalAlignment="Top" Width="132"/>
+        <Button Name="BtnSave" IsDefault="True" Content="Place order" HorizontalAlignment="Left" Margin="335,338,0,0" VerticalAlignment="Top" Width="130" Click="BtnSave_Click"/>
+        <Label Name="LblErrClientName" Visibility="Hidden" Content="Name must be 1-100 characters long, only letters" FontSize="9" Foreground="Red" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="82,46,0,0" Width="472"/>
+        <Label Name="LblErrClientPostCode" Visibility="Hidden" Content="Postal code must be in the format 'A1A 1A1'" FontSize="9" Foreground="Red" HorizontalAlignment="Center"  Margin="82,106,0,0" VerticalAlignment="Top" Width="472"/>
     </Grid>
 </Window>

@@ -90,6 +90,10 @@
     <Compile Include="Migrations\202311011520574_InitialCreate.designer.cs">
       <DependentUpon>202311011520574_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202311011915557_InitialCreate1.cs" />
+    <Compile Include="Migrations\202311011915557_InitialCreate1.designer.cs">
+      <DependentUpon>202311011915557_InitialCreate1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="NewOrderDialog.xaml.cs">
       <DependentUpon>NewOrderDialog.xaml</DependentUpon>
@@ -111,6 +115,9 @@
     </Compile>
     <EmbeddedResource Include="Migrations\202311011520574_InitialCreate.resx">
       <DependentUpon>202311011520574_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202311011915557_InitialCreate1.resx">
+      <DependentUpon>202311011915557_InitialCreate1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

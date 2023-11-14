@@ -95,7 +95,7 @@ namespace MidtermPizzaOrders
         public OrderStatusEnum OrderStatus { get; set; }
 
 
-        public string Extras;
+        public string Extras { get; set; }
 
         public enum SizeEnum
         {

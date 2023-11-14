@@ -54,7 +54,7 @@ namespace Day04TodosCRUD
             // show selected todo in AddEditDialog Window
             Todo currSelectedTodo = LvToDos.SelectedItem as Todo; // if cast failed, return null, if (Todo)LvToDos.SelectedItem failed will throw ex
             if (currSelectedTodo == null) return; // nothing selected
-            AddEditDialog dialog = new AddEditDialog();
+            AddEditDialog dialog = new AddEditDialog(currSelectedTodo);
             dialog.Owner = this;
             if (dialog.ShowDialog() == true)
             {

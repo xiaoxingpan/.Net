@@ -32,7 +32,7 @@ namespace Day02AllInputs
             string name = TbxName.Text;
             if (name == "")
             {
-                MessageBox.Show("Name must not be empty", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Name must not be empty", "Input error", MessageBoxButton.OK, MessageBoxImage.Error);Lv
                 return;
             }
 

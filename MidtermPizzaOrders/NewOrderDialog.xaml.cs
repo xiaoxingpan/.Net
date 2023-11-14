@@ -103,18 +103,13 @@ namespace MidtermPizzaOrders
                 currOrder.Extras = extras;
                 Console.WriteLine(currOrder.Extras);
             }
-            catch (ArgumentException ex)
-            {
-                MessageBox.Show(this, ex.Message, "Input error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            catch (SystemException ex)
-            {
-                MessageBox.Show(this, "Error reading from database\n" + ex.Message, "Database error",
-                    MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            
+            
+
 
             currOrder.OrderStatus = 0;
-            Globals.dbContextAuto.PizzaOrders.Add(currOrder);
+            G
+            lobals.dbContextAuto.PizzaOrders.Add(currOrder);
             Globals.dbContextAuto.SaveChanges();
             Console.WriteLine(currOrder);
             this.DialogResult = true; // dismiss the dialog
